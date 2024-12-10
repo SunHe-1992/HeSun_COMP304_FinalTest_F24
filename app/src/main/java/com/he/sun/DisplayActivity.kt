@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,7 +20,7 @@ class DisplayActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             HeSun_COMP304_FinalTest_F24Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(modifier = Modifier.safeContentPadding()) { innerPadding ->
                     Greeting2(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)

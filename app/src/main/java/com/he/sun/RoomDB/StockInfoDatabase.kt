@@ -10,16 +10,10 @@ import androidx.room.RoomDatabase
 @androidx.room.Database(entities = [StockInfo::class], version = 1)
 abstract class StockInfoDatabase : RoomDatabase() {
 
-    /**
-     * Provides access to the StockInfoDAO interface for interacting with city data.
-     *
-     * @return An instance of the StockInfoDAO.
-     */
-    abstract fun getCityDao(): StockInfoDAO
 
-    /**
-     * A singleton instance
-     */
+    abstract fun getStockInfoDAO(): StockInfoDAO
+
+
     companion object {
         @Volatile
         private var INSTANCE: StockInfoDatabase? = null
@@ -32,7 +26,7 @@ abstract class StockInfoDatabase : RoomDatabase() {
                     inst = Room.databaseBuilder(
                         context,
                         StockInfoDatabase::class.java,
-                        "citiesDB"
+                        "stocksDB"
                     ).build()
                 }
                 INSTANCE = inst
