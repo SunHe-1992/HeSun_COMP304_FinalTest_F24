@@ -20,7 +20,7 @@ class AppRepository(private val StockInfoDAO: StockInfoDAO) {
     }
 
 
-    suspend fun deleteCity(c: StockInfo) {
+    suspend fun deleteStockInfo(c: StockInfo) {
         StockInfoDAO.deleteStockInfo(c)
     }
 

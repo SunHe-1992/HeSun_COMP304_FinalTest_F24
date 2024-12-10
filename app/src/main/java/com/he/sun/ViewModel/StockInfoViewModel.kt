@@ -1,6 +1,5 @@
 package com.he.sun.ViewModel
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -24,22 +23,19 @@ class StockInfoViewModel(private val repository: AppRepository) : ViewModel() {
         }
     }
 
-    var weatherO by mutableStateOf<StockInfo?>(null)
-        private set
-
-    fun getWeather(city: String) {
-        viewModelScope.launch {
-            try {
-//                val weatherObj = repository.getCitiesFromDB(city)
-//                if (weatherObj != null) {
-//                    weatherO = weatherObj
-//                }
-            } catch (e: Exception) {
-                Log.d("error", e.toString()) // Log any exceptions for debugging
-            }
-        }
+    suspend fun refreshData() {
+        val fetchCities = repository.getStockInfosFromDB()
+        dbStockInfos = fetchCities
     }
 
+
+  fun deleteData(c: StockInfo){
+      viewModelScope.launch {
+          repository.deleteStockInfo(c)
+          refreshData()
+      }
+
+  }
 
     fun insertStockInfo(stockSymbol: String, companyName: String, stockQuote: Double) {
         viewModelScope.launch {
